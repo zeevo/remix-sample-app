@@ -34,8 +34,12 @@ const fakeContacts = {
       .sort(sortBy("-createdAt", "last"));
   },
 
-  async get(id: string): Promise<ContactRecord | null> {
-    return fakeContacts.records[id] || null;
+  get(id: string): Promise<ContactRecord | null> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(fakeContacts.records[id] || null);
+      }, 1000);
+    });
   },
 
   async create(values: ContactMutation): Promise<ContactRecord> {
